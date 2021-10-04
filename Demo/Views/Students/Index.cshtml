@@ -1,0 +1,67 @@
+﻿@model Demo.Models.StudentGenreViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<form asp-controller="Students" asp-action="Index" method="get">
+    <p>
+        <select asp-for="StudentGenre" asp-items="Model.DiaChi">
+            <option value="">Tất Cả</option>
+        </select>
+        Tìm kiếm: <input type="text" name="SearchString" />
+        <input type="submit" value="Done" />
+    </p>
+</form>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>Mã Học Sinh</label>
+            </th>
+            <th>
+                <label>Tên Học Sinh</label>
+            </th>
+            <th>
+                <label>Năm Sinh</label>
+            </th>
+            <th>
+                <label>Địa Chỉ</label>
+            </th>
+            <th>
+                <label>Email</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Students)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdStudent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamSinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdStudent">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdStudent">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdStudent">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
